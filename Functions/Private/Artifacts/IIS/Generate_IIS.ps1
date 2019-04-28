@@ -66,7 +66,12 @@ function ProcessDirectory([System.Text.StringBuilder] $DirectoryBuilder,
     $fullSourcePath = $SourcePath
     if ($global:SourceType -eq [SourceType]::Image -or
         $global:SourceType -eq [SourceType]::Remote) {
-        $fullSourcePath = $MountPath + $targetPath
+        if($RemoteInetpubPath) {
+            $fullSourcePath = $RemoteInetpubPath + $targetPath
+        }
+        else {
+            $fullSourcePath = $MountPath + $targetPath
+        }
     }
     Write-Verbose "Copying content from source: $SourcePath, to: $ManifestPath"  
     Copy-Item $fullSourcePath $ManifestPath -Recurse -Force

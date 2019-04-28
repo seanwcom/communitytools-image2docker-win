@@ -18,6 +18,9 @@
     .PARAMETER RemotePath
     Use a remote machine as the source for the artifacts. Specify the path to the system drive on the remote machine.
 
+    .PARAMETER RemoteInetpubPath
+    This parameter is used in conjunction with the RemotePath parameter. Sometimes Inetpub will be on a different volume than the value specified in RemotePath. Use this parameter to specify the remote path for Inetpub if different than the RemotePath parameter. This should be formatted the same as RemotePath.
+
     .PARAMETER OutputPath
     An optional parameter that specifies the filesystem path where artifacts and the resulting
     Dockerfile will be stored. If you do not specify a path, a temporary directory will be created for you within the $env:Temp location.
@@ -101,6 +104,9 @@
 
         [Parameter(Mandatory = $false)]
         [string] $RemotePath,
+
+        [Parameter(Mandatory = $false)]
+        [string] $RemoteInetpubPath,
         
         [Parameter(Mandatory = $false)]
         [Switch] $IncludeWindowsFeatures
