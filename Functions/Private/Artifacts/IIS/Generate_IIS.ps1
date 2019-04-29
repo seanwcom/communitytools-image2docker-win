@@ -39,11 +39,7 @@ function IncludePath([string[]] $pathParts) {
     return $false
 }
 
-function ProcessDirectory([System.Text.StringBuilder] $DirectoryBuilder, 
-                          [System.Text.StringBuilder] $CopyBuilder,
-                          [System.Text.StringBuilder] $AclBuilder,
-                          [string] $SourcePath,
-                          [bool] $FirstDirectory) {
+function ProcessDirectory([System.Text.StringBuilder] $DirectoryBuilder, [System.Text.StringBuilder] $CopyBuilder, [System.Text.StringBuilder] $AclBuilder, [string] $SourcePath, [bool] $FirstDirectory) {
     Write-Verbose "Processing source directory: $SourcePath"  
     $targetPath = $SourcePath.Substring(2) # skip the local drive letter
     if ($FirstDirectory -eq $true) {
