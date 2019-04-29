@@ -120,6 +120,10 @@ if (Test-Path -Path $ApplicationHostPath) {
         elseif ($global:SourceType -eq [SourceType]::Local) {
             $WindowsFeatures = Get-WindowsOptionalFeature -Online
         }
+        elseif ($global:SourceType -eq [SourceType]::Remote) {
+            $RemoteHostName = (New-Object System.Uri($RemotePath)).host
+            $WindowsFeatures = Invoke-Command -ComputerName $RemoteHostName -ScriptBlock { Get-WindowsOptionalFeature -Online }
+        }
         if ($WindowsFeatures) {
             $IIS = $WindowsFeatures.Where{$_.FeatureName -eq 'IIS-WebServer'}
             $EnabledFeatures = $WindowsFeatures.Where{$_.State -eq 'Enabled'}
